@@ -36,6 +36,8 @@ class UnitController extends Controller
         try {
 
             $unit = new Unit();
+            $unit->min_weight_range = $request->min_weight_range;
+            $unit->max_weight_range = $request->max_weight_range;
             $unit->name = $request->name;
             $unit->inserted_at = Carbon::now();
             $unit->inserted_by = Auth::user()->id;
@@ -75,6 +77,8 @@ class UnitController extends Controller
         $data = $request->validated();
         try {
             $unit = Unit::find($id);
+            $unit->min_weight_range = $request->min_weight_range;
+            $unit->max_weight_range = $request->max_weight_range;
             $unit->name = $request->name;
             $unit->modified_by = Auth::user()->id;
             $unit->save();

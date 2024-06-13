@@ -33,6 +33,31 @@
 
                             <div class="form-group-customer customer-additional-form">
                                 <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="input-block mb-3">
+                                            <label><b>Minimum Weight Range : <span class="text-danger">*</span></b></label>
+                                            <input type="text" id="min_weight_range" name="min_weight_range" class="form-control @error('min_weight_range') is-invalid @enderror" value="{{ $unit->min_weight_range }}" placeholder="Enter Minimum Weight Range">
+
+                                            @error('min_weight_range')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="input-block mb-3">
+                                            <label><b>Maximum Weight Range : <span class="text-danger">*</span></b></label>
+                                            <input type="text" id="max_weight_range" name="max_weight_range" class="form-control @error('max_weight_range') is-invalid @enderror" value="{{ $unit->max_weight_range }}" placeholder="Enter Maximum Weight Range">
+
+                                            @error('max_weight_range')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
 
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="input-block mb-3">

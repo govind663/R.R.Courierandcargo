@@ -24,14 +24,14 @@ class weightRequest extends FormRequest
         if ($this->id){
             $rule = [
                 'customer_id' => __('required|exists:customers,id,deleted_at,NULL'),
-                'weight' => __('required|numeric'),
+                'weight_range' => __('required|numeric'),
                 'unit_id' => __('required|exists:units,id,deleted_at,NULL'),
                 'amount'=> __('required|numeric'),
             ];
         }else{
             $rule = [
                 'customer_id' => __('required|exists:customers,id,deleted_at,NULL'),
-                'weight' => __('required|numeric'),
+                'weight_range' => __('required|numeric'),
                 'unit_id' => __('required|exists:units,id,deleted_at,NULL'),
                 'amount'=> __('required|numeric'),
             ];
@@ -44,8 +44,8 @@ class weightRequest extends FormRequest
         return [
             'customer_id.required' => __('Please Select Customer Name'),
             'customer_id.exists' => __('Customer Not Found'),
-            'weight.required' => __('Weight is required'),
-            'weight.numeric' => __('Weight must be numeric'),
+            'weight_range.required' => __('Please Select Weight Range'),
+            'weight_range.numeric' => __('Weight Range must be numeric'),
             'unit_id.required' => __('Please Select Unit'),
             'unit_id.exists' => __('Unit Not Found'),
             'amount.required' => __('Amount is required'),

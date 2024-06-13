@@ -13,6 +13,8 @@ class Unit extends Model
 
     protected $fillable = [
         'id',
+        'min_weight_range',
+        'max_weight_range',
         'name',
         'inserted_by',
         'inserted_at',

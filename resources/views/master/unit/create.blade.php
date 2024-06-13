@@ -34,8 +34,34 @@
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
-                                                <label><b>Name : <span class="text-danger">*</span></b></label>
-                                                <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Enter Name">
+                                                <label><b>Minimum Weight Range : <span class="text-danger">*</span></b></label>
+                                                <input type="text" id="min_weight_range" name="min_weight_range" class="form-control @error('min_weight_range') is-invalid @enderror" value="{{ old('min_weight_range') }}" placeholder="Enter Minimum Weight Range">
+
+                                                @error('min_weight_range')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div class="input-block mb-3">
+                                                <label><b>Maximum Weight Range : <span class="text-danger">*</span></b></label>
+                                                <input type="text" id="max_weight_range" name="max_weight_range" class="form-control @error('max_weight_range') is-invalid @enderror" value="{{ old('max_weight_range') }}" placeholder="Enter Maximum Weight Range">
+
+                                                @error('max_weight_range')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div class="input-block mb-3">
+                                                <label><b>Unit Name : <span class="text-danger">*</span></b></label>
+                                                <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Enter Unit Name">
 
                                                 @error('name')
                                                     <span class="invalid-feedback" role="alert">

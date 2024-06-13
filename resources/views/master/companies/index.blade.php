@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-2 float-right">
                             <a href="{{ route('company.create') }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-plus-circle me-2" aria-hidden="true"></i>Company
+                                <i class="fa fa-plus me-2" aria-hidden="true"></i>Company
                             </a>
                         </div>
                     </div>

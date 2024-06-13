@@ -57,7 +57,7 @@ weights | List
                         </div>
                         <div class="col-2 float-right">
                             <a href="{{ route('weight.create') }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-plus-circle me-2" aria-hidden="true"></i>Weight
+                                <i class="fa fa-plus me-2" aria-hidden="true"></i>Weight
                             </a>
                         </div>
                     </div>

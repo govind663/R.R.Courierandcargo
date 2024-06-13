@@ -14,7 +14,7 @@ class Weight extends Model
     protected $fillable = [
         'id',
         'customer_id',
-        'weight',
+        'weight_range',
         'unit_id',
         'amount',
         'inserted_by',

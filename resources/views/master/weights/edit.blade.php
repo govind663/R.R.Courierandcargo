@@ -52,10 +52,14 @@
 
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="input-block mb-3">
-                                            <label><b>Weight (g) : <span class="text-danger">*</span></b></label>
-                                            <input type="text" name="weight" id="weight" class="form-control @error('weight') is-invalid @enderror" value="{{ $weight->weight }}" placeholder="Enter Weight">
-                                            <input type="hidden" name="unit_id" id="unit_id" class="form-control @error('unit_id') is-invalid @enderror" value="{{ $weight->unit_id }}" >
-                                            @error('weight')
+                                            <label><b>Select Weight Range : <span class="text-danger">*</span></b></label>
+                                            <select  class="form-control @error('weight_range') is-invalid @enderror select" id="weight_range" name="weight_range">
+                                                <option value="">Select Weight Range</option>
+                                                <option value="1" {{ (old("weight_range") == '1' ? "selected":"") }}>0.01 - 250 (g)</option>
+                                                <option value="2" {{ (old("weight_range") == '2' ? "selected":"") }}>251 - 500 (g)</option>
+                                                <option value="3" {{ (old("weight_range") == '3' ? "selected":"") }}>1 (Kg)</option>
+                                            </select>
+                                            @error('weight_range')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -63,7 +67,7 @@
                                         </div>
                                     </div>
 
-                                    {{-- <div class="col-lg-4 col-md-12 col-sm-12">
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
                                         <div class="input-block mb-3">
                                             <label><b>Select Unit Name : <span class="text-danger">*</span></b></label>
                                             <select  class="form-control @error('unit_id') is-invalid @enderror select" id="unit_id" name="unit_id">
@@ -78,7 +82,7 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                    </div> --}}
+                                    </div>
 
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="input-block mb-3">

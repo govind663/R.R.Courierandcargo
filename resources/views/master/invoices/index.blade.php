@@ -57,7 +57,7 @@ Invoice | List
                         </div>
                         <div class="col-2 float-right">
                             <a href="{{ route('invoice.create') }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-plus-circle me-2" aria-hidden="true"></i>Invoice
+                                <i class="fa fa-plus me-2" aria-hidden="true"></i>Invoice
                             </a>
                         </div>
                     </div>

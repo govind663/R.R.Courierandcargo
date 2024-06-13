@@ -40,7 +40,7 @@ class WeightController extends Controller
         try {
             $weight = new Weight();
             $weight->customer_id = $request->customer_id;
-            $weight->weight = $request->weight;
+            $weight->weight_range = $request->weight_range;
             $weight->unit_id = $request->unit_id;
             $weight->amount = $request->amount;
             $weight->inserted_at = Carbon::now();
@@ -84,7 +84,7 @@ class WeightController extends Controller
         try {
             $weight = Weight::find($id);
             $weight->customer_id = $request->customer_id;
-            $weight->weight = $request->weight;
+            $weight->weight_range = $request->weight_range;
             $weight->unit_id = $request->unit_id;
             $weight->amount = $request->amount;
             $weight->modified_at = Carbon::now();

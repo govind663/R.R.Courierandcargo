@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-2 float-right">
                             <a href="{{ route('unit.create') }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-plus-circle me-2" aria-hidden="true"></i>Unit
+                                <i class="fa fa-plus me-2" aria-hidden="true"></i>Unit
                             </a>
                         </div>
                     </div>
@@ -68,7 +68,9 @@
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <th>Name</th>
+                                        <th>Minimum Weight Range</th>
+                                        <th>Maximum Weight Range</th>
+                                        <th>Unit</th>
                                         <th class="no-export">Action</th>
                                     </tr>
                                 </thead>
@@ -76,6 +78,8 @@
                                     @foreach ($units as $key=>$value )
                                     <tr>
                                         <td class="text-left">{{ ++$key }}</td>
+                                        <td>{{ $value->min_weight_range }}</td>
+                                        <td>{{ $value->max_weight_range }}</td>
                                         <td>{{ $value->name }}</td>
                                         <td class="no-export d-flex">
                                             <a href="{{ route('unit.edit', $value->id) }}" class="btn btn-warning btn-sm text-dark">
