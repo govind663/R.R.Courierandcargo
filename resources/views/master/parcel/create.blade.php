@@ -33,17 +33,13 @@
                                     <div class="row">
                                         <div class="col-lg-4 col-md-12 col-sm-12">
                                             <div class="input-block mb-3">
-                                                <label><b>Select Customer Name : <span class="text-danger">*</span></b></label>
+                                                <label><b>Customer Name : <span class="text-danger">*</span></b></label>
                                                 <select  class="form-control @error('customer_id') is-invalid @enderror select" id="customer_id" name="customer_id">
                                                     <option value="">Select Customer Name</option>
                                                     @foreach ($customer as $value )
                                                     <option value="{{ $value->id }}" {{ (old("customer_id") == $value->id ? "selected":"") }}>{{ $value->name }}</option>
                                                     @endforeach
                                                 </select>
-
-                                                <input type="hidden" id="old_weight" name="old_weight" class="form-control " value="">
-                                                <input type="hidden" id="old_amount" name="old_amount" class="form-control " value="">
-
                                                 @error('customer_id')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -90,24 +86,11 @@
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
-                                                <label><b>Weight (g) : <span class="text-danger">*</span></b></label>
-                                                <input type="text" id="weight" name="weight" class="form-control @error('weight') is-invalid @enderror" value="{{ old('weight') }}" placeholder="Enter Weight">
-                                                <input type="hidden" name="unit_id" id="unit_id" class="form-control @error('unit_id') is-invalid @enderror" value="1" >
-                                                @error('weight')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        {{-- <div class="col-lg-4 col-md-12 col-sm-12">
-                                            <div class="input-block mb-3">
-                                                <label><b>Select Unit : <span class="text-danger">*</span></b></label>
+                                                <label><b>Weight Range : <span class="text-danger">*</span></b></label>
                                                 <select  class="form-control @error('unit_id') is-invalid @enderror select" id="unit_id" name="unit_id">
-                                                    <option value="">Select Unit</option>
-                                                    @foreach ($unit as $value )
-                                                    <option value="{{ $value->id }}" {{ (old("unit_id") == $value->id ? "selected":"") }}>{{ $value->name }}</option>
+                                                    <option value="">Select Weight Range</option>
+                                                    @foreach ($unit as $weightrange)
+                                                    <option value="{{ $weightrange->id }}" {{ (old("unit_id") == $weightrange->id ? "selected":"") }}>{{ $weightrange->min_weight_range }} - {{ $weightrange->max_weight_range }} {{ $weightrange->name }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('unit_id')
@@ -116,11 +99,24 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                        </div> --}}
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div class="input-block mb-3">
+                                                <label><b>Weight : <span class="text-danger">*</span></b></label>
+                                                <input type="text" id="weight" name="weight" class="form-control @error('weight') is-invalid @enderror" value="{{ old('weight') }}" placeholder="Enter Weight">
+                                                @error('weight')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
 
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Amount : <span class="text-danger">*</span></b></label>
+                                                <input type="hidden" name="old_amount" id="old_amount" class="form-control" value="{{ old('old_amount') }}" >
                                                 <input type="text" readonly id="amount" name="amount" class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount') }}" placeholder="Enter Amount">
                                                 @error('amount')
                                                     <span class="invalid-feedback" role="alert">
@@ -149,40 +145,25 @@
 {{-- fetch weight --}}
 <script>
     $(document).ready(function(){
-        $(document).on('change','#customer_id', function() {
-            let customer_id = $(this).val();
-            $('#old_weight').show();
+        $(document).on('change','#weight', function() {
+            let weight = $(this).val();
+            let customer_id = $('#customer_id').val();
+            let unit_id = $('#unit_id').val();
+
+            $('#amount').show();
             $.ajax({
                 method: 'POST',
                 url: "{{ route('fetch_weight') }}",
                 data: {
                     customerId: customer_id,
+                    unitId: unit_id,
+                    weight: weight,
                     _token : '{{ csrf_token() }}'
                 },
-                success: function(response) {
-                    $('#old_weight').val(response.weight);
-                    $('#old_amount').val(response.amount);
+                success: function(data) {
+                    $('#amount').val(data.amount);
                 }
             });
-        });
-    });
-</script>
-
-<script>
-    $(document).ready(function () {
-        $('#old_weight, #old_amount, #weight').on('keyup', function () {
-            let old_weight = $('#old_weight').val();
-            let old_amount = $('#old_amount').val();
-            let weight = $('#weight').val();
-
-            if (old_weight != '' && old_amount != '' && weight != '') {
-
-                var one_quantity_value = (parseInt(weight) / (parseInt(old_weight)));
-                var totalAmt = (one_quantity_value * parseInt(old_amount));
-
-                $('#amount').val(totalAmt);
-            }
-
         });
     });
 </script>

@@ -27,7 +27,7 @@ class WeightController extends Controller
     public function create()
     {
         $customer = Customer::orderBy("id","desc")->whereNull('deleted_at')->get();
-        $unit = Unit::orderBy("id","desc")->whereNull('deleted_at')->get();
+        $unit = Unit::orderBy("id","asc")->whereNull('deleted_at')->get();
         return view('master.weights.create', ['customer'=>$customer, 'unit'=>$unit]);
     }
 
@@ -40,7 +40,6 @@ class WeightController extends Controller
         try {
             $weight = new Weight();
             $weight->customer_id = $request->customer_id;
-            $weight->weight_range = $request->weight_range;
             $weight->unit_id = $request->unit_id;
             $weight->amount = $request->amount;
             $weight->inserted_at = Carbon::now();
@@ -71,7 +70,7 @@ class WeightController extends Controller
     {
         $weight = Weight::find($id);
         $customer = Customer::orderBy("id","desc")->whereNull('deleted_at')->get();
-        $unit = Unit::orderBy("id","desc")->whereNull('deleted_at')->get();
+        $unit = Unit::orderBy("id","asc")->whereNull('deleted_at')->get();
         return view('master.weights.edit', ['weight'=>$weight, 'customer'=>$customer, 'unit'=>$unit]);
     }
 
@@ -83,8 +82,6 @@ class WeightController extends Controller
         $data = $request->validated();
         try {
             $weight = Weight::find($id);
-            $weight->customer_id = $request->customer_id;
-            $weight->weight_range = $request->weight_range;
             $weight->unit_id = $request->unit_id;
             $weight->amount = $request->amount;
             $weight->modified_at = Carbon::now();

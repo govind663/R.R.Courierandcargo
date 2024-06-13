@@ -28,7 +28,7 @@ class ParcelController extends Controller
     public function create()
     {
         $customer = Customer::orderBy("id","desc")->whereNull('deleted_at')->get();
-        $unit = Unit::orderBy("id","desc")->whereNull('deleted_at')->get();
+        $unit = Unit::orderBy("id","asc")->whereNull('deleted_at')->get();
         $weight = Weight::orderBy("id","desc")->whereNull('deleted_at')->get();
 
         return view("master.parcel.create", ["customer"=>$customer, "unit"=>$unit, "weight"=>$weight]);
@@ -139,8 +139,22 @@ class ParcelController extends Controller
     }
 
     public function fetch_weight_amt(Request $request){
-        $data['weight'] = Weight::where('customer_id', $request->customerId)->pluck('weight');
-        $data['amount'] = Weight::where('customer_id', $request->customerId)->pluck('amount');
+
+        $data['unitID'] = $request->unitId;
+        $data['customerId'] = $request->customerId;
+        $data['weights'] = $request->weight;
+
+        // Using having clause to filter the units based on weight range
+        $data['rangeUnitId'] = Unit::where('id', $data['unitID'])
+                                    ->where('min_weight_range', '<=', $data['weights'])
+                                    ->where('max_weight_range', '>=', $data['weights'])
+                                    ->first('id');
+
+        // === get amount in rangeUnitId wise in if condition weights
+        $data['amount'] = Weight::select('amount')
+                                ->where('customer_id', $data['customerId'])
+                                ->where('unit_id', $data['rangeUnitId']->id)
+                                ->first();
 
         return response()->json($data);
     }

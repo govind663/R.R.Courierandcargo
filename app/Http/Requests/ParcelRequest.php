@@ -55,8 +55,8 @@ class ParcelRequest extends FormRequest
             'destination.required' => __('Destination is required'),
             'weight.required' => __('Weight is required'),
             'weight.numeric' => __('Weight must be numeric'),
-            'unit_id.required' => __('Please Select Unit'),
-            'unit_id.exists' => __('Unit Not Found'),
+            'unit_id.required' => __('Please Select Weight Range'),
+            'unit_id.exists' => __('Weight Range Not Found'),
             'amount.required' => __('Amount is required'),
             'amount.numeric' => __('Amount must be numeric'),
         ];

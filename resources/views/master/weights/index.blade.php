@@ -69,7 +69,7 @@ weights | List
                                     <tr>
                                         <th>Sr. No.</th>
                                         <th>Customer Name</th>
-                                        <th>Weight (g)</th>
+                                        <th>Weight Range</th>
                                         <th>Amount</th>
                                         <th class="no-export">Action</th>
                                     </tr>
@@ -79,7 +79,7 @@ weights | List
                                     <tr>
                                         <td class="text-left">{{ ++$key }}</td>
                                         <td>{{ $value->customer?->name }}</td>
-                                        <td>{{ $value->weight }}</td>
+                                        <td>{{ $value->unit?->min_weight_range }} - {{ $value->unit?->max_weight_range }} {{ $value->unit?->name }}</td>
                                         <td>{{ $value->amount }}</td>
                                         <td class="no-export d-flex">
                                             <a href="{{ route('weight.edit', $value->id) }}" class="btn btn-warning btn-sm text-dark">

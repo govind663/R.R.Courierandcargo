@@ -51,13 +51,13 @@
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Select Weight Range : <span class="text-danger">*</span></b></label>
-                                                <select  class="form-control @error('weight_range') is-invalid @enderror select" id="weight_range" name="weight_range">
+                                                <select  class="form-control @error('unit_id') is-invalid @enderror select" id="unit_id" name="unit_id">
                                                     <option value="">Select Weight Range</option>
-                                                    <option value="1" {{ (old("weight_range") == '1' ? "selected":"") }}>0.01 - 250 (g)</option>
-                                                    <option value="2" {{ (old("weight_range") == '2' ? "selected":"") }}>251 - 500 (g)</option>
-                                                    <option value="3" {{ (old("weight_range") == '3' ? "selected":"") }}>1 (Kg)</option>
+                                                    @foreach ($unit as $weightrange)
+                                                    <option value="{{ $weightrange->id }}" {{ (old("unit_id") == $weightrange->id ? "selected":"") }}>{{ $weightrange->min_weight_range }} - {{ $weightrange->max_weight_range }} {{ $weightrange->name }}</option>
+                                                    @endforeach
                                                 </select>
-                                                @error('weight_range')
+                                                @error('unit_id')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
