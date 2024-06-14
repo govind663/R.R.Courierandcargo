@@ -73,7 +73,7 @@ Parcel | List
                                         <th>Pickup Date</th>
                                         <th>C. Note No.</th>
                                         <th>Destination</th>
-                                        <th>Weight (g)</th>
+                                        <th>Weight</th>
                                         <th>Amount</th>
                                         <th class="no-export">Action</th>
                                     </tr>
@@ -87,8 +87,8 @@ Parcel | List
                                         <td>{{ date('d-m-Y', strtotime($value->pickup_dt)) }}</td>
                                         <td>{{ $value->c_note_number }}</td>
                                         <td>{{ $value->destination }}</td>
-                                        <td>{{ $value->weight }}</td>
-                                        <td>{{ $value->amount }}</td>
+                                        <td>{{ $value->weight }} {{ $value->unit?->name ?? "N/A" }}</td>
+                                        <td>{{ $value->amount }} </td>
                                         <td class="no-export d-flex">
                                             <a href="{{ route('parcel.edit', $value->id) }}" class="btn btn-warning btn-sm text-dark">
                                                 <i class="far fa-edit me-2"></i>Edit

@@ -261,7 +261,7 @@
                             </td>
 
                             <td style="width: 30%; text-align: justify;">
-                                <img src="{{ public_path('/assets/qrcode/QrCode.jpg') }}" alt="QrCode" class="barcode-image">
+                                <img src="{{ public_path('/assets/qrcode/qrCode.png') }}" alt="QrCode" class="barcode-image">
                                 {{-- <img src='data:image/png;base64,".base64_encode({{ $qrCode }})."'> --}}
                             </td>
                         </tr>
@@ -281,8 +281,8 @@
                             <th>Pickup Date</th>
                             <th>C. Note Number</th>
                             <th>Destination</th>
-                            <th>Weight (gram)</th>
-                            <th>Amount (RS)</th>
+                            <th>Weight </th>
+                            <th>Amount</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -299,7 +299,7 @@
                                 {{ $value->destination }}
                             </td>
                             <td>
-                                {{ $value->weight }}
+                                {{ $value->weight }} {{ $value->unit?->name ?? "N/A" }}
                             </td>
                             <td>
                                 {{ $value->amount }}

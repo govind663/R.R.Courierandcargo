@@ -164,7 +164,7 @@ class InvoiceController extends Controller
     public function generateCustomerWisePDF(Request $request, $id, $customer_id){
 
         // Generate QrCode with PDF
-        $data['qrCode'] = QrCode::format('png')->size(300)->generate('Your QR Code Data');
+        // $data['qrCode'] = QrCode::format('png')->size(300)->generate('Your QR Code Data');
         // dd($data['qrCode']);
 
         $basic_detail = [
@@ -185,10 +185,12 @@ class InvoiceController extends Controller
         $to_date = Invoice::findOrFail($id)->where('customer_id',$customer_id)->pluck('to_dt')->toArray();
         $customer_id = Invoice::findOrFail($id)->where('customer_id',$customer_id)->pluck('customer_id')->toArray();
         // dd($customer_id);
-        $data['parcels'] = Parcel::where('customer_id', $customer_id)
-                                    ->whereBetween('pickup_dt', [$from_date, $to_date])
-                                    ->whereNull('deleted_at')
-                                    ->get();
+
+        $data['parcels'] = Parcel::with('customer', 'unit')
+                                ->where('customer_id', $customer_id)
+                                ->whereBetween('pickup_dt', [$from_date, $to_date])
+                                ->whereNull('deleted_at')
+                                ->get();
 
 
         // === get nt amount

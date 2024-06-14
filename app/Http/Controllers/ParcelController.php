@@ -49,7 +49,7 @@ class ParcelController extends Controller
             $parcel->c_note_number = $request->c_note_number;
             $parcel->destination = $request->destination;
             $parcel->weight = $request->weight;
-            $parcel->unit_id = '1';
+            $parcel->unit_id = $request->unit_id;
             $parcel->amount = $request->amount;
             $parcel->inserted_at = Carbon::now();
             $parcel->inserted_by = Auth::user()->id;
@@ -102,11 +102,10 @@ class ParcelController extends Controller
             $parcel = Parcel::findOrFail($id);
             $parcel->customer_id = $request->customer_id;
             $parcel->pickup_dt = date('Y-m-d', strtotime($request->pickup_dt));
-            // $parcel->pickup_time = Carbon::now()->toTimeString();
             $parcel->c_note_number = $request->c_note_number;
             $parcel->destination = $request->destination;
             $parcel->weight = $request->weight;
-            $parcel->unit_id = '1';
+            $parcel->unit_id = $request->unit_id;
             $parcel->amount = $request->amount;
             $parcel->modified_at = Carbon::now();
             $parcel->modified_by = Auth::user()->id;
@@ -145,16 +144,21 @@ class ParcelController extends Controller
         $data['weights'] = $request->weight;
 
         // Using having clause to filter the units based on weight range
-        $data['rangeUnitId'] = Unit::where('id', $data['unitID'])
-                                    ->where('min_weight_range', '<=', $data['weights'])
-                                    ->where('max_weight_range', '>=', $data['weights'])
-                                    ->first('id');
+        $data['rangeUnitId'] = Unit::where('id', $data['unitID'])->pluck('id')->first();
+
+        // Default amount if no range matches
+        $data['calculatedAmount'] = '';
 
         // === get amount in rangeUnitId wise in if condition weights
-        $data['amount'] = Weight::select('amount')
-                                ->where('customer_id', $data['customerId'])
-                                ->where('unit_id', $data['rangeUnitId']->id)
-                                ->first();
+        if($data['rangeUnitId'] == '1'){
+            $data['calculatedAmount'] = Weight::where('customer_id', $data['customerId'])->where('unit_id', $data['rangeUnitId'])->pluck('amount')->first();
+        }else if($data['rangeUnitId'] == '2'){
+            $data['calculatedAmount'] = Weight::where('customer_id', $data['customerId'])->where('unit_id', $data['rangeUnitId'])->pluck('amount')->first();
+        }else if($data['rangeUnitId'] == '3'){
+            $data['currentAmount'] = Weight::where('customer_id', $data['customerId'])->where('unit_id', $data['rangeUnitId'])->pluck('amount')->first();
+            $data['calculatedAmount'] = $data['currentAmount'] * $data['weights'];
+        }
+        $data['amount'] = $data['calculatedAmount'];
 
         return response()->json($data);
     }

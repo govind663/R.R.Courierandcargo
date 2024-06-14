@@ -116,7 +116,6 @@
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Amount : <span class="text-danger">*</span></b></label>
-                                                <input type="hidden" name="old_amount" id="old_amount" class="form-control" value="{{ old('old_amount') }}" >
                                                 <input type="text" readonly id="amount" name="amount" class="form-control @error('amount') is-invalid @enderror" value="{{ old('amount') }}" placeholder="Enter Amount">
                                                 @error('amount')
                                                     <span class="invalid-feedback" role="alert">
