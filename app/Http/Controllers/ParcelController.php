@@ -156,6 +156,8 @@ class ParcelController extends Controller
             $data['calculatedAmount'] = Weight::where('customer_id', $data['customerId'])->where('unit_id', $data['rangeUnitId'])->pluck('amount')->first();
         }else if($data['rangeUnitId'] == '3'){
             $data['currentAmount'] = Weight::where('customer_id', $data['customerId'])->where('unit_id', $data['rangeUnitId'])->pluck('amount')->first();
+        }else if($data['rangeUnitId'] == '4'){
+            $data['currentAmount'] = Weight::where('customer_id', $data['customerId'])->where('unit_id', $data['rangeUnitId'])->pluck('amount')->first();
             $data['calculatedAmount'] = $data['currentAmount'] * $data['weights'];
         }
         $data['amount'] = $data['calculatedAmount'];
