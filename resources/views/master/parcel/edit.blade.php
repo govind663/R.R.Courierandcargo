@@ -57,7 +57,7 @@
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="input-block mb-3">
                                             <label><b>Pickup Date : <span class="text-danger">*</span></b></label>
-                                            <input type="text" id="pickup_dt" name="pickup_dt" class="form-control datetimepicker @error('pickup_dt') is-invalid @enderror" value="{{ $parcel->pickup_dt }}" placeholder="Enter Pickup Date">
+                                            <input type="text" id="pickup_dt" name="pickup_dt" class="form-control datetimepicker @error('pickup_dt') is-invalid @enderror" value="{{ date('d-m-Y', strtotime($parcel->pickup_dt)) }}" placeholder="Enter Pickup Date">
                                             @error('pickup_dt')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
