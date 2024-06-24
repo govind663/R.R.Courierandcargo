@@ -19,6 +19,8 @@ class Parcel extends Model
         'pickup_dt',
         'c_note_number',
         'destination',
+        'within_mumbai_thane',
+        'surface',
         'weight',
         'unit_id',
         'amount',

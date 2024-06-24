@@ -48,6 +48,8 @@ class ParcelController extends Controller
             $parcel->pickup_time = Carbon::now()->toTimeString();
             $parcel->c_note_number = $request->c_note_number;
             $parcel->destination = $request->destination;
+            $parcel->within_mumbai_thane = $request->within_mumbai_thane;
+            $parcel->surface = $request->surface;
             $parcel->weight = $request->weight;
             $parcel->unit_id = $request->unit_id;
             $parcel->amount = $request->amount;
@@ -104,6 +106,8 @@ class ParcelController extends Controller
             $parcel->pickup_dt = date('Y-m-d', strtotime($request->pickup_dt));
             $parcel->c_note_number = $request->c_note_number;
             $parcel->destination = $request->destination;
+            $parcel->within_mumbai_thane = $request->within_mumbai_thane;
+            $parcel->surface = $request->surface;
             $parcel->weight = $request->weight;
             $parcel->unit_id = $request->unit_id;
             $parcel->amount = $request->amount;

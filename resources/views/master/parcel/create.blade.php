@@ -84,6 +84,40 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-lg-4 col-md-12 col-sm-12">
+                                            <div class="input-block mb-3">
+                                                <label><b>Within Mumbai / Thane : <span class="text-danger">*</span></b></label>
+                                                <select  class="form-control @error('within_mumbai_thane') is-invalid @enderror select" id="within_mumbai_thane" name="within_mumbai_thane">
+                                                    <option value="">Select Within Mumbai / Thane</option>
+                                                    <option value="1" {{ (old("within_mumbai_thane") == "1" ? "selected":"") }}>Within Maharashtra</option>
+                                                    <option value="2" {{ (old("within_mumbai_thane") == "2" ? "selected":"") }}>Metro</option>
+                                                    <option value="3" {{ (old("within_mumbai_thane") == "3" ? "selected":"") }}>Rest of India</option>
+                                                    <option value="4" {{ (old("within_mumbai_thane") == "4" ? "selected":"") }}>Special Zones</option>
+                                                </select>
+                                                @error('within_mumbai_thane')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-12 col-sm-12">
+                                            <div class="input-block mb-3">
+                                                <label><b>Surface : <span class="text-danger">*</span></b></label>
+                                                <select  class="form-control @error('surface') is-invalid @enderror select" id="surface" name="surface">
+                                                    <option value="">Select Surface</option>
+                                                    <option value="1" {{ (old("surface") == "1" ? "selected":"") }}>Air</option>
+                                                    <option value="2" {{ (old("surface") == "2" ? "selected":"") }}>Urgent</option>
+                                                </select>
+                                                @error('surface')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="input-block mb-3">
                                                 <label><b>Weight Range : <span class="text-danger">*</span></b></label>
