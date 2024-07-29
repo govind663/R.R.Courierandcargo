@@ -30,7 +30,7 @@ R. R. COURIER & CARGO | Home
                 <div class="col">
                     <h3 class="page-title">Dashboard</h3>
                     <ul class="breadcrumb">
-                        {{-- <li class="breadcrumb-item active">Home</li> --}}
+                        <li class="breadcrumb-item active">Home</li>
                     </ul>
                 </div>
             </div>
@@ -38,7 +38,7 @@ R. R. COURIER & CARGO | Home
         <!-- /Page Header -->
 
         <div class="row">
-            {{-- Total Earning Money --}}
+            {{-- Total Customers --}}
             <div class="col-xl-3 col-sm-6 col-12">
                 <div class="card">
                     <div class="card-body border shadow">
@@ -50,7 +50,9 @@ R. R. COURIER & CARGO | Home
                             <div class="dash-count">
                                 <div class="dash-title text-dark">Total Customers</div>
                                 <div class="dash-counts text-dark">
-                                    <p>0</p>
+                                    <p>
+                                        {{ $totalCustomers ? $totalCustomers : 0 }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +71,9 @@ R. R. COURIER & CARGO | Home
                             <div class="dash-count">
                                 <div class="dash-title text-dark">Total Parcel</div>
                                 <div class="dash-counts text-dark">
-                                    <p>0</p>
+                                    <p>
+                                        {{ $totalParcels ? $totalParcels : 0 }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -77,26 +81,7 @@ R. R. COURIER & CARGO | Home
                 </div>
             </div>
 
-            {{-- Total Retailer Count --}}
-            <!--<div class="col-xl-3 col-sm-6 col-12">-->
-            <!--    <div class="card">-->
-            <!--        <div class="card-body border shadow">-->
-            <!--            <div class="dash-widget-header">-->
-            <!--                <span class="dash-widget-icon bg-2">-->
-            <!--                    <i class="fas fa-users"></i>-->
-            <!--                </span>-->
-            <!--                <div class="dash-count">-->
-            <!--                    <div class="dash-title text-dark">Total Retailer</div>-->
-            <!--                    <div class="dash-counts text-dark">-->
-            <!--                        <p>0</p>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!--        </div>-->
-            <!--    </div>-->
-            <!--</div>-->
-
-            {{-- Total Policy Count --}}
+            {{-- Total Invoice Count --}}
             <div class="col-xl-3 col-sm-6 col-12">
                 <div class="card">
                     <div class="card-body border shadow">
@@ -107,7 +92,9 @@ R. R. COURIER & CARGO | Home
                             <div class="dash-count">
                                 <div class="dash-title text-dark">Total Invoice</div>
                                 <div class="dash-counts text-dark">
-                                    <p>0</p>
+                                    <p>
+                                        {{ $totalInvoices ? $totalInvoices : 0 }}
+                                    </p>
                                 </div>
                             </div>
                         </div>

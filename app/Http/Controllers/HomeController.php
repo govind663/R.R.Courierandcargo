@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Invoice;
+use App\Models\Parcel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +28,20 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        return view('home');
+        // === Total Customers
+        $totalCustomers = Customer::orderBy("id","desc")->whereNull('deleted_at')->count();
+
+        // === Total Parcels
+        $totalParcels = Parcel::orderBy("id","desc")->whereNull('deleted_at')->count();
+
+        // === Total Invoice
+        $totalInvoices = Invoice::orderBy("id","desc")->whereNull('deleted_at')->count();
+
+        return view('home', [
+            'totalCustomers' => $totalCustomers,
+            'totalParcels' => $totalParcels,
+            'totalInvoices' => $totalInvoices
+        ]);
     }
 
     public function changePassword(Request $request)
@@ -35,7 +51,7 @@ class HomeController extends Controller
 
     public function updatePassword(Request $request)
     {
-            # Validation
+            # ======= Validation
             $request->validate([
                 'current_password' => 'required',
                 'password' => 'required|string|min:8|confirmed',
